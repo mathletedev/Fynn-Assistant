@@ -1,0 +1,22 @@
+{
+  "name": "fynn-assistant",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MathleteDev/Fynn-Assistant.git"
+  },
+  "author": "TheMathlete",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MathleteDev/Fynn-Assistant/issues"
+  },
+  "homepage": "https://github.com/MathleteDev/Fynn-Assistant#readme",
+  "dependencies": {
+    "eris-sharder": "^1.10.0"
+  }
+}
