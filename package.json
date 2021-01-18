@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/MathleteDev/Fynn-Assistant#readme",
   "dependencies": {
+    "dotenv": "^8.2.0",
     "eris-sharder": "^1.10.0"
   }
 }
