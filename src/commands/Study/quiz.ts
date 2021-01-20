@@ -1,6 +1,6 @@
 import get from "axios";
 import Command from "../../utils/command";
-import { EmbedOptions, Emoji, Message } from "eris";
+import { EmbedOptions, Emoji, Message, TextChannel } from "eris";
 import { MessageArgs, ParsedArg } from "../../utils/interfaces";
 
 const categories: Record<string, number> = {
@@ -80,7 +80,7 @@ module.exports = new Command (
       allAnswers.push(question.correct_answer);
       allAnswers = bot.utils.shuffle<string>(allAnswers);
 
-      const msg: Message = await message.channel.createMessage({ embed: {
+      const msg: Message<TextChannel> = await message.channel.createMessage({ embed: {
         title: "🔎 Quiz",
         description: `**${bot.utils.decodeHTML(question.question)}**\n\n${allAnswers.map((ans: string, i: number) => `❯ **${letters[i].toUpperCase()})** ${bot.utils.decodeHTML(ans)}`).join("\n")}\n\n❯ **Type:** Multiple Choice\n❯ **Category:** ${question.category}\n❯ **Difficulty:** ${question.difficulty[0].toUpperCase() + question.difficulty.slice(1)}`,
         color: bot.embedColors.blue,
@@ -92,7 +92,7 @@ module.exports = new Command (
       }
 
       const filter = (userID: string, emoji: Emoji) => userID === message.author.id && emojis.includes(emoji.name);
-      const reactions = await bot.collectors.awaitReactions(message, filter, { time: 2e4, maxMatches: 1 });
+      const reactions = await bot.collectors.awaitReactions(msg, filter, { time: 2e4, maxMatches: 1 });
 
       if (!reactions.length) return `Time's up! The correct answer was \`${bot.utils.decodeHTML(question.correct_answer)}\``;
 
