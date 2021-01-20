@@ -4,21 +4,21 @@ import { Base } from "eris-sharder";
 import { Client } from "eris";
 import Command from "./utils/command";
 import Utils from "./utils/utils";
+import Collector from "./utils/collectors"
 
 export default class Bot extends Base {
   public cmds: Command[] = [];
   public categories: string[] = readdirSync(join(__dirname, "commands"));
   public utils: Utils = new Utils(this);
+  public collectors: Collector = new Collector();
 
-  public embedColors: Record<string, number>;
+  public embedColors: Record<string, number> = {
+    blue: 0x0066ff,
+    red: 0xff0000
+  };
 
   public constructor(client: { bot: Client, clusterID: number }) {
     super(client);
-
-    this.embedColors = {
-      blue: 0x0066ff,
-      red: 0xff0000
-    }
   }
 
   public launch(): void {
@@ -28,7 +28,7 @@ export default class Bot extends Base {
   }
 
   public RefreshStatus(): void {
-    this.bot.editStatus("offline", {
+    this.bot.editStatus("dnd", {
       name: `[ ?help ] !`,
       type: 0
     });
