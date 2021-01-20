@@ -35,11 +35,6 @@ const difficulties: string[] = ["easy", "medium", "hard"];
 const letters: string[] = ["w", "x", "y", "z"];
 const emojis: string[] = ["🇼", "🇽", "🇾", "🇿"];
 
-interface Args {
-  category: string | number | null,
-  difficulty: string | null
-}
-
 module.exports = new Command (
   {
     name: "quiz",
