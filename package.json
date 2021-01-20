@@ -19,10 +19,13 @@
   },
   "homepage": "https://github.com/MathleteDev/Fynn-Assistant#readme",
   "dependencies": {
+    "axios": "^0.21.1",
     "dotenv": "^8.2.0",
-    "eris": "^0.13.4"
+    "eris": "^0.13.4",
+    "he": "^1.2.0"
   },
   "devDependencies": {
+    "@types/he": "^1.1.1",
     "@types/node": "^14.14.21",
     "eris-sharder": "^1.10.0"
   },

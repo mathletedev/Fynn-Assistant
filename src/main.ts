@@ -3,10 +3,12 @@ import { join } from "path";
 import { Base } from "eris-sharder";
 import { Client } from "eris";
 import Command from "./utils/command";
+import Utils from "./utils/utils";
 
 export default class Bot extends Base {
   public cmds: Command[] = [];
   public categories: string[] = readdirSync(join(__dirname, "commands"));
+  public utils: Utils = new Utils(this);
 
   public embedColors: Record<string, number>;
 
@@ -27,7 +29,7 @@ export default class Bot extends Base {
 
   public RefreshStatus(): void {
     this.bot.editStatus("offline", {
-      name: `"$help"!`,
+      name: `[ ?help ] !`,
       type: 0
     });
   }
@@ -35,9 +37,9 @@ export default class Bot extends Base {
   private loadCommands(): void {
     readdirSync(join(__dirname, "commands")).forEach((dir: string) => {
       readdirSync(join(__dirname, "commands", dir)).filter((file: string) => file.endsWith(".js")).forEach((file: string) => {
-        const pull: any = require(`./commands/${dir}/${file}`);
+        const pull: Command = require(`./commands/${dir}/${file}`);
 
-        this.cmds.push(new pull.default());
+        this.cmds.push(pull);
       });
     });
   }
