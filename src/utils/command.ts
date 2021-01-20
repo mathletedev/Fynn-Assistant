@@ -1,4 +1,4 @@
-import { Permission, TextChannel, Embed } from "eris";
+import { Permission, Embed } from "eris";
 import { CommandArgs, MessageArgs, Argument } from "./interfaces";
 
 export default class Command {
@@ -11,7 +11,7 @@ export default class Command {
   }
 
   public async exec({ bot, message, args }: MessageArgs): Promise<Embed | string | void> {
-    const perms: Permission = (message.channel as TextChannel).permissionsOf(message.author.id);
+    const perms: Permission = message.channel.permissionsOf(message.author.id);
 
     if (this.props.permissions) {
       const req: string[] = this.props.permissions.filter(perm => !perms.has(perm));
@@ -22,7 +22,7 @@ export default class Command {
           description: req.sort().map((perm: string) => `\`${perm[0].toUpperCase + perm.slice(1)}\``).join(" "),
           color: bot.embedColors.red,
           footer: bot.utils.getFooter(message.author)
-        }
+        };
       }
     }
 
@@ -35,7 +35,7 @@ export default class Command {
             title: "🏷️ Invalid Arguments",
             description: `Invalid argument \`${arg.id}\` of \`${this.props.description.usage}\``,
             color: bot.embedColors.red
-          }
+          };
         }
       }
     }
@@ -50,7 +50,7 @@ export default class Command {
         title: "⚠️ Error!",
         description: error.toString(),
         color: bot.embedColors.red
-      }
+      };
     }
   }
 }

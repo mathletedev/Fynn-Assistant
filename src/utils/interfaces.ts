@@ -1,9 +1,9 @@
-import { Message } from "eris";
+import { Message, TextChannel } from "eris";
 import Bot from "../main";
 
 export interface MessageArgs {
   bot: Bot,
-  message: Message,
+  message: Message<TextChannel>,
   args: any[]
 }
 

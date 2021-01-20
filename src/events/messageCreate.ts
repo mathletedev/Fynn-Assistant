@@ -1,8 +1,8 @@
-import { Message } from "eris";
+import { Message, TextChannel } from "eris";
 import Command from "../utils/command";
 require("dotenv").config();
 
-exports.handler = async function(message: Message): Promise<any> {
+exports.handler = async function(message: Message<TextChannel>): Promise<any> {
   if (message.author.bot || !message.content.startsWith(process.env.BOT_PREFIX!)) return;
 
   let args: string[] = message.content.slice(process.env.BOT_PREFIX!.length).toLowerCase().split(" ").map((item: string) => item.trim());
@@ -24,7 +24,7 @@ exports.handler = async function(message: Message): Promise<any> {
       content: res.content,
       file: res.file,
       embed: (res.embed ? res.embed : res)
-    }
+    };
   }
 
   message.channel.createMessage(res, res.file);

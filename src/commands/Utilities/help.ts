@@ -6,7 +6,7 @@ require("dotenv").config();
 const emojis: Record<string, string> = {
   Study: "📖",
   Utilities: "🛠️"
-}
+};
 
 module.exports = new Command(
   {
@@ -38,7 +38,7 @@ module.exports = new Command(
         description: info,
         color: bot.embedColors.blue,
         footer: bot.utils.getFooter(message.author)
-      }
+      };
     } else {
       const commands = (cat: string): string => {
         return bot.cmds
@@ -54,7 +54,7 @@ module.exports = new Command(
         fields: bot.categories.map((cat: string) => ({ name: `${emojis[cat]} ${cat}`, value: commands(cat), inline: true })),
         color: bot.embedColors.blue,
         footer: bot.utils.getFooter(message.author)
-      }
+      };
     }
   }
 );
