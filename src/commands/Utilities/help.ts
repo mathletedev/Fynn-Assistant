@@ -1,5 +1,5 @@
 import Command from "../../utils/command";
-import { Embed } from "eris";
+import { EmbedOptions } from "eris";
 import { MessageArgs } from "../../utils/interfaces";
 require("dotenv").config();
 
@@ -20,7 +20,7 @@ module.exports = new Command(
     }
   },
 
-  async ({ bot, message, args }: MessageArgs): Promise<Embed | string> => {
+  async ({ bot, message, args }: MessageArgs): Promise<EmbedOptions | string> => {
     if (args.length) {
       const command: Command = bot.cmds.find(cmd => cmd.props.name === args[0] || (cmd.props.aliases && cmd.props.aliases.includes(args[0])))!;
 
@@ -33,7 +33,6 @@ module.exports = new Command(
       info += `\n❯ **Usage:** \`${command.props.description.usage}\`\n❯ **Examples:**\n${command.props.description.examples.map((example: string) => `\`${example}\``).join("\n")}`;
 
       return {
-        type: "rich",
         title: "📓 Help",
         description: info,
         color: bot.embedColors.blue,
@@ -48,7 +47,6 @@ module.exports = new Command(
       }
 
       return {
-        type: "rich",
         title: "📓 Help",
         description: `Type \`${process.env.BOT_PREFIX}help [ command ]\` to see info on that command!`,
         fields: bot.categories.map((cat: string) => ({ name: `${emojis[cat]} ${cat}`, value: commands(cat), inline: true })),

@@ -1,23 +1,22 @@
-import { Permission, Embed } from "eris";
+import { Permission, EmbedOptions } from "eris";
 import { CommandArgs, MessageArgs, Argument } from "./interfaces";
 
 export default class Command {
   public props: CommandArgs;
-  public execCommand: (messageArgs: MessageArgs) => Promise<Embed | string | void>;
+  public execCommand: (messageArgs: MessageArgs) => Promise<EmbedOptions | string | void>;
 
-  public constructor(props: CommandArgs, exec: (messageArgs: MessageArgs) => Promise<Embed | string | void>) {
+  public constructor(props: CommandArgs, exec: (messageArgs: MessageArgs) => Promise<EmbedOptions | string | void>) {
     this.props = props;
     this.execCommand = exec;
   }
 
-  public async exec({ bot, message, args }: MessageArgs): Promise<Embed | string | void> {
+  public async exec({ bot, message, args }: MessageArgs): Promise<EmbedOptions | string | void> {
     const perms: Permission = message.channel.permissionsOf(message.author.id);
 
     if (this.props.permissions) {
       const req: string[] = this.props.permissions.filter(perm => !perms.has(perm));
       if (req.length > 0) {
         return {
-          type: "rich",
           title: "🔑 Missing Permissions",
           description: req.sort().map((perm: string) => `\`${perm[0].toUpperCase + perm.slice(1)}\``).join(" "),
           color: bot.embedColors.red,
@@ -31,7 +30,6 @@ export default class Command {
         const arg: Argument = this.props.args[i];
         if ((arg.required && !args[i]) || (args[i] && arg.valid && !arg.valid({ bot, message, arg: args[i] }))) {
           return {
-            type: "rich",
             title: "🏷️ Invalid Arguments",
             description: `Invalid argument \`${arg.id}\` of \`${this.props.description.usage}\``,
             color: bot.embedColors.red
@@ -46,7 +44,6 @@ export default class Command {
       console.log(error);
       
       return {
-        type: "rich",
         title: "⚠️ Error!",
         description: error.toString(),
         color: bot.embedColors.red
