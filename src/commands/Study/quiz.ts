@@ -82,7 +82,7 @@ module.exports = new Command (
 
       const msg: Message<TextChannel> = await message.channel.createMessage({ embed: {
         title: "🔎 Quiz",
-        description: `**${bot.utils.decodeHTML(question.question)}**\n\n${allAnswers.map((ans: string, i: number) => `❯ **${letters[i].toUpperCase()})** ${bot.utils.decodeHTML(ans)}`).join("\n")}\n\n❯ **Type:** Multiple Choice\n❯ **Category:** ${question.category}\n❯ **Difficulty:** ${question.difficulty[0].toUpperCase() + question.difficulty.slice(1)}`,
+        description: `**${bot.utils.decodeHTML(question.question)}**\n\n${allAnswers.map((ans: string, i: number) => `❯ **${letters[i].toUpperCase()})** ${bot.utils.decodeHTML(ans)}`).join("\n")}\n\n❯ **Type:** Multiple Choice\n❯ **Category:** ${question.category}\n❯ **Difficulty:** ${bot.utils.capitalize(question.difficulty)}`,
         color: bot.embedColors.green,
         footer: bot.utils.getFooter(message.author)
       }});

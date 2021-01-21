@@ -18,7 +18,7 @@ export default class Command {
       if (req.length > 0) {
         return {
           title: "🔑 Missing Permissions",
-          description: req.sort().map((perm: string) => `\`${perm[0].toUpperCase + perm.slice(1)}\``).join(" "),
+          description: req.sort().map((perm: string) => `\`${bot.utils.parseCamelCase(perm)}\``).join(" "),
           color: bot.embedColors.red,
           footer: bot.utils.getFooter(message.author)
         };

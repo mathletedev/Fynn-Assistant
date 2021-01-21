@@ -1,4 +1,4 @@
-import { Message, TextChannel } from "eris";
+import { Constants, Message, TextChannel } from "eris";
 import Bot from "../main";
 
 export interface MessageArgs {

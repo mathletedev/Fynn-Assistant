@@ -2,6 +2,7 @@ import Bot from "../main";
 import { User } from "eris";
 import { EmbedFooterOptions } from "eris";
 import { decode } from "he";
+import { stringify } from "querystring";
 
 export default class Utils {
   private bot: Bot;
@@ -13,6 +14,8 @@ export default class Utils {
   public capitalize = (str: string): string => str.split(" ").map((word: string) => word[0].toUpperCase() + word.slice(1)).join(" ");
 
   public strictCapitalize = (str: string): string => str.split(" ").map((word: string) => word[0].toUpperCase() + word.slice(1).toLowerCase()).join(" ");
+
+  public parseCamelCase = (str: string): string => (str[0].toUpperCase() + str.slice(1)).split(/(?=[A-Z])/).join(" ");
 
   public joinParts(arr: string[]): string {
     const last: string = arr.pop()!;
