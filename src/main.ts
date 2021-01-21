@@ -14,6 +14,7 @@ export default class Bot extends Base {
 
   public embedColors: Record<string, number> = {
     blue: 0x0066ff,
+    green: 0x00d438,
     red: 0xff0000
   };
 

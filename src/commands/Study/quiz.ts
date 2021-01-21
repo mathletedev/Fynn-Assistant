@@ -68,7 +68,7 @@ module.exports = new Command (
       return {
         title: "🔎 Quiz Help",
         description: `❯ **Categories:** ${Object.keys(categories).map((cat: string) => `\`${cat}\``).join(" ")}\n\n❯ **Difficulties:** ${difficulties.map((dif: string) => `\`${dif}\``).join(" ")}`,
-        color: bot.embedColors.blue,
+        color: bot.embedColors.green,
         footer: bot.utils.getFooter(message.author)
       };
     } else {
@@ -83,7 +83,7 @@ module.exports = new Command (
       const msg: Message<TextChannel> = await message.channel.createMessage({ embed: {
         title: "🔎 Quiz",
         description: `**${bot.utils.decodeHTML(question.question)}**\n\n${allAnswers.map((ans: string, i: number) => `❯ **${letters[i].toUpperCase()})** ${bot.utils.decodeHTML(ans)}`).join("\n")}\n\n❯ **Type:** Multiple Choice\n❯ **Category:** ${question.category}\n❯ **Difficulty:** ${question.difficulty[0].toUpperCase() + question.difficulty.slice(1)}`,
-        color: bot.embedColors.blue,
+        color: bot.embedColors.green,
         footer: bot.utils.getFooter(message.author)
       }});
 
