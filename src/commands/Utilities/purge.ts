@@ -21,7 +21,10 @@ module.exports = new Command(
     ]
   },
 
-  async ({ bot, message }: MessageArgs): Promise<void> => {
-    
+  async ({ bot, message, args }: MessageArgs): Promise<void> => {
+    message.delete();
+
+    message.channel.purge(parseInt(args[0]) + 1)
+      .catch(err => message.channel.createMessage(bot.utils.error(err.toString(), message)));
   }
 );

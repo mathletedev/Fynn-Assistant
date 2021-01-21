@@ -1,4 +1,4 @@
-import { Permission, EmbedOptions } from "eris";
+import { Permission, EmbedOptions, AdvancedMessageContent } from "eris";
 import { CommandArgs, MessageArgs, Argument } from "./interfaces";
 
 export default class Command {
@@ -10,7 +10,7 @@ export default class Command {
     this.execCommand = exec;
   }
 
-  public async exec({ bot, message, args }: MessageArgs): Promise<EmbedOptions | string | void> {
+  public async exec({ bot, message, args }: MessageArgs): Promise<AdvancedMessageContent | EmbedOptions | string | void> {
     const perms: Permission = message.channel.permissionsOf(message.author.id);
 
     if (this.props.permissions) {
@@ -43,11 +43,7 @@ export default class Command {
     } catch (error: any) {
       console.log(error);
       
-      return {
-        title: "⚠️ Error!",
-        description: error.toString(),
-        color: bot.embedColors.red
-      };
+      return bot.utils.error(error.toString(), message);
     }
   }
 }

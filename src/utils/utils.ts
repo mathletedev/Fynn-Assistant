@@ -1,8 +1,7 @@
 import Bot from "../main";
-import { User } from "eris";
+import { AdvancedMessageContent, Message, User } from "eris";
 import { EmbedFooterOptions } from "eris";
 import { decode } from "he";
-import { stringify } from "querystring";
 
 export default class Utils {
   private bot: Bot;
@@ -45,4 +44,13 @@ export default class Utils {
   }
 
   public decodeHTML = (html: string): string => decode(html);
+
+  public error(description: string, message: Message): AdvancedMessageContent {
+    return { embed: {
+      title: "⚠️ Error!",
+      description,
+      color: this.bot.embedColors.red,
+      footer: this.getFooter(message.author)
+    }};
+  }
 };
