@@ -29,7 +29,7 @@ module.exports = new Command(
       let info = `❯ **Command:** \`${command.props.name}\``;
       if (command.props.aliases) info += `\n❯ **Aliases:** ${command.props.aliases.sort().map((alias: string) => `\`${alias}\``).join(" ")}`;
       info += `\n❯ **Description:** ${command.props.description.content}\n❯ **Category:** ${command.props.category}`;
-      if (command.props.permissions!.length) info += `\n❯ **Permissions:** ${command.props.permissions!.map((perm: string) => `\`${perm}\``).join(" ")}`;
+      if (command.props.permissions) info += `\n❯ **Permissions:** ${command.props.permissions.map((perm: string) => `\`${perm}\``).join(" ")}`;
       info += `\n❯ **Usage:** \`${command.props.description.usage}\`\n❯ **Examples:**\n${command.props.description.examples.map((example: string) => `\`${example}\``).join("\n")}`;
 
       return {
