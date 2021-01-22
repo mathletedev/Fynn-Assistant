@@ -48,9 +48,9 @@ export default class Utils {
 		return tmpArr;
 	}
 
-	public getFooter(user: User): EmbedFooterOptions {
+	public getFooter(user: User, text: string = ""): EmbedFooterOptions {
 		return {
-			text: user.username,
+			text: `${user.username} | ${text}`,
 			icon_url: user.dynamicAvatarURL("png")
 		};
 	}
