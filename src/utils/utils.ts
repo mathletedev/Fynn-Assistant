@@ -50,7 +50,7 @@ export default class Utils {
 
 	public getFooter(user: User, text: string = ""): EmbedFooterOptions {
 		return {
-			text: `${user.username} | ${text}`,
+			text: `${user.username}${text === "" ? "" : ` | ${text}`}`,
 			icon_url: user.dynamicAvatarURL("png")
 		};
 	}
