@@ -1,27 +1,27 @@
 // Thanks to turret-dev for the Eris-Sharder typings!
 
 declare module "eris-sharder" {
-	import { EventEmitter } from "events"
-	import Eris from "eris"
+	import { EventEmitter } from "events";
+	import Eris from "eris";
 
 	class Cluster {
-    public shards: number;
-    public maxShards: number;
-    public firstShardID: number;
-    public lastShardID: number;
-    public mainFile: any;
-    public clusterID: number;
-    public clusterCount: number;
-    public guilds: number;
-    public users: number;
-    public uptime: number;
-    public exclusiveGuilds: number;
-    public largeGuilds: number;
-    public voiceChannels: number;
-    public shardsStats: any[];
-    public app: any;
-    public bot: Eris.Client | null;
-    public test: boolean;
+		public shards: number;
+		public maxShards: number;
+		public firstShardID: number;
+		public lastShardID: number;
+		public mainFile: any;
+		public clusterID: number;
+		public clusterCount: number;
+		public guilds: number;
+		public users: number;
+		public uptime: number;
+		public exclusiveGuilds: number;
+		public largeGuilds: number;
+		public voiceChannels: number;
+		public shardsStats: any[];
+		public app: any;
+		public bot: Eris.Client | null;
+		public test: boolean;
 
 		constructor();
 
@@ -29,31 +29,42 @@ declare module "eris-sharder" {
 
 		spawn(): undefined;
 
-		connect(firstShardID: number, lastShardID: number, maxShards: number, token: string, type: any, clientOptions: Eris.ClientOptions): undefined;
-	
+		connect(
+			firstShardID: number,
+			lastShardID: number,
+			maxShards: number,
+			token: string,
+			type: any,
+			clientOptions: Eris.ClientOptions
+		): undefined;
+
 		loadCode(bot: Eris.Client): undefined;
 
 		startStats(bot: Eris.Client): undefined;
 	}
 
 	export class Master extends EventEmitter {
-		constructor(token: string, mainFile: string, options: {
-			clientOptions: Eris.ClientOptions,
-			shards?: number,
-			firstShardID?: number,
-			lastShardID?: number,
-			clusters?: number,
-			clusterTimeout?: number,
-			stats?: boolean,
-			statsInterval?: number,
-			name?: string,
-			guildsPerShard?: number,
-			webhooks?: {
-				cluster?: any,
-				shard?: any
-			},
-			debug?: boolean
-		});
+		constructor(
+			token: string,
+			mainFile: string,
+			options: {
+				clientOptions: Eris.ClientOptions;
+				shards?: number;
+				firstShardID?: number;
+				lastShardID?: number;
+				clusters?: number;
+				clusterTimeout?: number;
+				stats?: boolean;
+				statsInterval?: number;
+				name?: string;
+				guildsPerShard?: number;
+				webhooks?: {
+					cluster?: any;
+					shard?: any;
+				};
+				debug?: boolean;
+			}
+		);
 
 		isMaster(): boolean;
 
@@ -83,22 +94,22 @@ declare module "eris-sharder" {
 
 		sendTo(cluster: Cluster, message: string): undefined;
 	}
-	
+
 	export abstract class Base {
 		protected bot: Eris.Client;
 		protected cluserID: number;
 		protected ipc: {
-			register(event: string, callback: Function): void,
-			unregister(event: string): void,
-			broadcast(name: string, message: any): void,
-			sendTo(cluster: number, name: string, message: any): void,
-			fetchUser(id: string): Promise<Eris.User>,
-			fetchGuild(id: string): Promise<Eris.Guild>,
-			fetchChannel(id: string): Promise<Eris.Channel>
-		}
+			register(event: string, callback: Function): void;
+			unregister(event: string): void;
+			broadcast(name: string, message: any): void;
+			sendTo(cluster: number, name: string, message: any): void;
+			fetchUser(id: string): Promise<Eris.User>;
+			fetchGuild(id: string): Promise<Eris.Guild>;
+			fetchChannel(id: string): Promise<Eris.Channel>;
+		};
 
-		constructor(setup: { bot: Eris.Client, clusterID: number });
-		
+		constructor(setup: { bot: Eris.Client; clusterID: number });
+
 		restartCluster(clusterID: number): undefined;
 
 		abstract launch(): any;
