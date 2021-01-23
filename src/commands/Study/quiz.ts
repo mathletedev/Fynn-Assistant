@@ -43,7 +43,7 @@ module.exports = new Command(
 		description: {
 			content:
 				"Get a quiz question from OpenTDB! Don't pass any parameters to see all available categories.",
-			usage: "quiz [] category ] [ difficulty ]",
+			usage: "quiz [ category ] [ difficulty ]",
 			examples: ["quiz", "quiz math", "quiz sports hard"]
 		},
 		args: [
