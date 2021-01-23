@@ -3,11 +3,21 @@ import Command from "../utils/command";
 require("dotenv").config();
 
 exports.handler = async function (message: Message<TextChannel>): Promise<any> {
+	if (message.author.bot) return;
+
 	if (
-		message.author.bot ||
+		message.channel.parentID &&
+		message.channel.parentID === process.env.HELP_AVAILABLE &&
 		!message.content.startsWith(process.env.BOT_PREFIX!)
-	)
+	) {
+		message.channel.edit(
+			{
+				parentID: process.env.HELP_ONGOING
+			},
+			"Help Ongoing"
+		);
 		return;
+	}
 
 	let args: string[] = message.content
 		.slice(process.env.BOT_PREFIX!.length)
@@ -23,6 +33,15 @@ exports.handler = async function (message: Message<TextChannel>): Promise<any> {
 	)!;
 
 	if (!command) return;
+	if (
+		message.channel.parentID &&
+		command.props.name !== "close" &&
+		(message.channel.parentID === process.env.HELP_ONGOING ||
+			message.channel.parentID === process.env.HELP_AVAILABLE)
+	) {
+		message.delete();
+		return;
+	}
 
 	let res: any = await command.exec({
 		bot: this,
