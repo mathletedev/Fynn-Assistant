@@ -12,7 +12,7 @@ const emojis: Record<string, string> = {
 module.exports = new Command(
 	{
 		name: "help",
-		aliases: ["commands", "cmds"],
+		aliases: ["commands", "cmds", "info", "information"],
 		category: "Utilities",
 		description: {
 			content: "Get help and info on commands!",
