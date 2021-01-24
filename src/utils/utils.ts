@@ -67,4 +67,17 @@ export default class Utils {
 			}
 		};
 	}
+
+	public getEmbedColor(category: string): string {
+		switch (category) {
+			default:
+				return "red";
+			case "Procrastination":
+				return "orange";
+			case "Study":
+				return "green";
+			case "Utilities":
+				return "blue";
+		}
+	}
 }

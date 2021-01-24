@@ -40,9 +40,7 @@ module.exports = new Command(
 			fields: [
 				{ name: "Input", value: `\`\`\`${equation}\`\`\`` },
 				{ name: "Output", value: `\`\`\`${result.data}\`\`\`` }
-			],
-			color: bot.embedColors.green,
-			footer: bot.utils.getFooter(message.author)
+			]
 		};
 	}
 );

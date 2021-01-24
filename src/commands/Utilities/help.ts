@@ -55,9 +55,7 @@ module.exports = new Command(
 
 			return {
 				title: "📓 Help",
-				description: info,
-				color: bot.embedColors.blue,
-				footer: bot.utils.getFooter(message.author)
+				description: info
 			};
 		} else {
 			const commands = (cat: string): string => {
@@ -74,9 +72,7 @@ module.exports = new Command(
 					name: `${emojis[cat]} ${cat}`,
 					value: commands(cat),
 					inline: true
-				})),
-				color: bot.embedColors.blue,
-				footer: bot.utils.getFooter(message.author)
+				}))
 			};
 		}
 	}

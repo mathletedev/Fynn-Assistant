@@ -25,8 +25,7 @@ module.exports = new Command(
 		);
 		return {
 			title: "🙋 Help Available",
-			description: `Start typing in the chat to get help!\n\n❯ Please give a detailed description of your question\n❯ Include images / text if possible\n❯ Be patient! Someone will be there to help you\n❯ Please don't use commands in this channel (except for closing)\n\nType \`${process.env.BOT_PREFIX}close\` in order to close the help channel!`,
-			color: bot.embedColors.blue
+			description: `Start typing in the chat to get help!\n\n❯ Please give a detailed description of your question\n❯ Include images / text if possible\n❯ Be patient! Someone will be there to help you\n❯ Please don't use commands in this channel (except for closing)\n\nType \`${process.env.BOT_PREFIX}close\` in order to close the help channel!`
 		};
 	}
 );

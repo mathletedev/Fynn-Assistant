@@ -56,6 +56,18 @@ exports.handler = async function (message: Message<TextChannel>): Promise<any> {
 			file: res.file,
 			embed: res.embed ? res.embed : res
 		};
+
+		if (!res.embed.color) {
+			res.embed.color = this.embedColors[
+				this.utils.getEmbedColor(command.props.category)
+			];
+		}
+
+		if (!res.embed.footer || !res.embed.footer.text) {
+			res.embed.footer = this.utils.getFooter(message.author);
+		} else {
+			res.embed.footer.text += this.utils.getFooter(message.author);
+		}
 	}
 
 	message.channel.createMessage(res, res.file);

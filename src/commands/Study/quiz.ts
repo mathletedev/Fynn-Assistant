@@ -72,9 +72,7 @@ module.exports = new Command(
 					.map((cat: string) => `\`${cat}\``)
 					.join(" ")}\n\n❯ **Difficulties:** ${difficulties
 					.map((dif: string) => `\`${dif}\``)
-					.join(" ")}`,
-				color: bot.embedColors.green,
-				footer: bot.utils.getFooter(message.author)
+					.join(" ")}`
 			};
 		} else {
 			const res: any = await get(
