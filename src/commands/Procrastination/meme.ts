@@ -31,7 +31,7 @@ module.exports = new Command(
 			url: `https://www.reddit.com${meme.permalink}`,
 			image: { url: meme.url },
 			color: bot.embedColors.orange,
-			footer: { text: `${meme.ups} | 💬 ${meme.num_comments}` }
+			footer: { text: `👍 ${meme.ups} | 💬 ${meme.num_comments}` }
 		};
 	}
 );

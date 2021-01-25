@@ -66,7 +66,10 @@ exports.handler = async function (message: Message<TextChannel>): Promise<any> {
 		if (!res.embed.footer || !res.embed.footer.text) {
 			res.embed.footer = this.utils.getFooter(message.author);
 		} else {
-			this.utils.getFooter(message.author, res.embed.footer.text);
+			res.embed.footer = this.utils.getFooter(
+				message.author,
+				res.embed.footer.text
+			);
 		}
 	}
 
