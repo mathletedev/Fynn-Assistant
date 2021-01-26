@@ -113,7 +113,7 @@ module.exports = new Command(
 				msg.addReaction(emoji);
 			}
 
-			const filter = (userID: string, emoji: Emoji) =>
+			const filter = (userID: string, emoji: Emoji): boolean =>
 				userID === message.author.id && emojis.includes(emoji.name);
 			const reactions = await bot.collectors.awaitReactions(msg, filter, {
 				time: 2e4,
