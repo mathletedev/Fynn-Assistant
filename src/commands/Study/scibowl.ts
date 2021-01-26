@@ -42,7 +42,7 @@ module.exports = new Command(
 		const filter = (userID: string, emoji: Emoji): boolean =>
 			userID === message.author.id && emoji.name === "🙋";
 		await bot.collectors.awaitReactions(tossup, filter, {
-			time: 8e3,
+			time: 1e4,
 			maxMatches: 1
 		});
 
