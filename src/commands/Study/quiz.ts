@@ -101,7 +101,7 @@ module.exports = new Command(
 									ans
 								)}`
 						)
-						.join("\n")}\n\n❯ **Type:** Multiple Choice\n❯ **Category:** ${
+						.join("\n")}\n\n❯ **Category:** ${
 						question.category
 					}\n❯ **Difficulty:** ${bot.utils.capitalize(question.difficulty)}`,
 					color: bot.embedColors.green,
