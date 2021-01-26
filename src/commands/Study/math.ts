@@ -23,11 +23,7 @@ module.exports = new Command(
 		]
 	},
 
-	async ({
-		bot,
-		message,
-		args
-	}: MessageArgs): Promise<EmbedOptions | string> => {
+	async ({ args }: MessageArgs): Promise<EmbedOptions | string> => {
 		const equation: string = args.join(" ");
 		const result = await get(
 			`https://api.mathjs.org/v4?expr=${encodeURIComponent(equation)}`
