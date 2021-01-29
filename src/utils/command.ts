@@ -5,11 +5,13 @@ export default class Command {
 	public props: CommandArgs;
 	public execCommand: (
 		messageArgs: MessageArgs
-	) => Promise<EmbedOptions | string | void>;
+	) => Promise<AdvancedMessageContent | EmbedOptions | string | void>;
 
 	public constructor(
 		props: CommandArgs,
-		exec: (messageArgs: MessageArgs) => Promise<EmbedOptions | string | void>
+		exec: (
+			messageArgs: MessageArgs
+		) => Promise<AdvancedMessageContent | EmbedOptions | string | void>
 	) {
 		this.props = props;
 		this.execCommand = exec;

@@ -4,6 +4,7 @@ import { MessageArgs } from "../../utils/interfaces";
 require("dotenv").config();
 
 const emojis: Record<string, string> = {
+	Data: "📊",
 	Procrastination: "💭",
 	Study: "📖",
 	Utilities: "🛠️"

@@ -16,6 +16,7 @@ export default class Bot extends Base {
 		blue: 0x0066ff,
 		green: 0x00d438,
 		orange: 0xff7700,
+		purple: 0x5d009c,
 		red: 0xff0000
 	};
 

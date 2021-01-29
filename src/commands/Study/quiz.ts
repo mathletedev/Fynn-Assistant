@@ -74,63 +74,61 @@ module.exports = new Command(
 					.map((dif: string) => `\`${dif}\``)
 					.join(" ")}`
 			};
-		} else {
-			const res: any = await get(
-				`https://opentdb.com/api.php?amount=1&category=${
-					categories[args[0]]
-				}&difficulty=${
-					args[1] && difficulties.includes(args[1]) ? args[1] : ""
-				}&type=multiple`
-			);
+		}
 
-			const question: any = res.data.results[0];
+		const res: any = await get(
+			`https://opentdb.com/api.php?amount=1&category=${
+				categories[args[0]]
+			}&difficulty=${
+				args[1] && difficulties.includes(args[1]) ? args[1] : ""
+			}&type=multiple`
+		);
 
-			let allAnswers: string[] = question.incorrect_answers;
-			allAnswers.push(question.correct_answer);
-			allAnswers = bot.utils.shuffle<string>(allAnswers);
+		const question: any = res.data.results[0];
 
-			const msg: Message<TextChannel> = await message.channel.createMessage({
-				embed: {
-					title: "🔎 Quiz",
-					description: `**${bot.utils.decodeHTML(
-						question.question
-					)}**\n\n${allAnswers
-						.map(
-							(ans: string, i: number) =>
-								`❯ **${letters[i].toUpperCase()})** ${bot.utils.decodeHTML(
-									ans
-								)}`
-						)
-						.join("\n")}\n\n❯ **Category:** ${
-						question.category
-					}\n❯ **Difficulty:** ${bot.utils.capitalize(question.difficulty)}`,
-					color: bot.embedColors.green,
-					footer: bot.utils.getFooter(message.author)
-				}
-			});
+		let allAnswers: string[] = question.incorrect_answers;
+		allAnswers.push(question.correct_answer);
+		allAnswers = bot.utils.shuffle<string>(allAnswers);
 
-			for (const emoji of emojis) {
-				msg.addReaction(emoji);
+		const msg: Message<TextChannel> = await message.channel.createMessage({
+			embed: {
+				title: "🔎 Quiz",
+				description: `**${bot.utils.decodeHTML(
+					question.question
+				)}**\n\n${allAnswers
+					.map(
+						(ans: string, i: number) =>
+							`❯ **${letters[i].toUpperCase()})** ${bot.utils.decodeHTML(ans)}`
+					)
+					.join("\n")}\n\n❯ **Category:** ${
+					question.category
+				}\n❯ **Difficulty:** ${bot.utils.capitalize(question.difficulty)}`,
+				color: bot.embedColors.green,
+				footer: bot.utils.getFooter(message.author)
 			}
+		});
 
-			const filter = (userID: string, emoji: Emoji): boolean =>
-				userID === message.author.id && emojis.includes(emoji.name);
-			const reactions = await bot.collectors.awaitReactions(msg, filter, {
-				time: 2e4,
-				maxMatches: 1
-			});
+		for (const emoji of emojis) {
+			msg.addReaction(emoji);
+		}
 
-			if (!reactions.length)
-				return `Time's up! The correct answer was \`${bot.utils.decodeHTML(
-					question.correct_answer
-				)}\``;
+		const filter = (userID: string, emoji: Emoji): boolean =>
+			userID === message.author.id && emojis.includes(emoji.name);
+		const reactions = await bot.collectors.awaitReactions(msg, filter, {
+			time: 2e4,
+			maxMatches: 1
+		});
 
-			const selected = emojis.indexOf(reactions[0].emoji.name);
-			if (allAnswers[selected] === question.correct_answer)
-				return "That's right! Great job!";
-			return `Oops! The correct answer was \`${bot.utils.decodeHTML(
+		if (!reactions.length)
+			return `Time's up! The correct answer was \`${bot.utils.decodeHTML(
 				question.correct_answer
 			)}\``;
-		}
+
+		const selected = emojis.indexOf(reactions[0].emoji.name);
+		if (allAnswers[selected] === question.correct_answer)
+			return "That's right! Great job!";
+		return `Oops! The correct answer was \`${bot.utils.decodeHTML(
+			question.correct_answer
+		)}\``;
 	}
 );

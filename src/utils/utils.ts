@@ -72,6 +72,8 @@ export default class Utils {
 		switch (category) {
 			default:
 				return "red";
+			case "Data":
+				return "purple";
 			case "Procrastination":
 				return "orange";
 			case "Study":

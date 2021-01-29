@@ -27,7 +27,7 @@ module.exports = new Command(
 
 		message.channel
 			.purge(parseInt(args[0]) + 1)
-			.catch((err) =>
+			.catch((err: any) =>
 				message.channel.createMessage(bot.utils.error(err.toString(), message))
 			);
 	}
